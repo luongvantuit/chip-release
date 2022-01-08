@@ -2,6 +2,6 @@
 
 [GitHub Repository](https://github.com/project-chip/connectedhomeip.git)
 
-## __Setup environment__
+## __Setup environments__
 
 ## __Build Library Android__
