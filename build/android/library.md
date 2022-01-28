@@ -69,9 +69,11 @@ cd out
 ninja -C android_arm64
 ```
 
+Build all 4 structure CPU: arm, arm64, x64, x86.
+
 3. Get all file *.so *.jar structure folder:
 
-Find file in __out/android_$TARGET_CPU__
+Find file in `out/android_$TARGET_CPU`
 
 Struct folder for module project all `TARGET_CPU`
 
@@ -101,9 +103,9 @@ Struct folder for module project all `TARGET_CPU`
 └──
 ```
 
-Copy to libs folder in module in project.
+Copy to `libs` folder in module in project.
 
-4. Config file build.gradle module
+4. Config file `build.gradle` module
 
 ```gradle
 android {
@@ -132,7 +134,7 @@ android {
     ...
     sourceSets {
         main {
-            jniLibs.srcDirs = ['libs/jni'] // Path library jni folder contain *.so file
+            jniLibs.srcDirs = ['libs/jni'] // Path library jni folder contain *.so file.
         }
     }
 }
