@@ -20,11 +20,6 @@ if [ -z "$ANDROID_NDK_HOME" ]; then
     exit 1
 fi
 
-if [ -z "$TARGET_CPU" ]; then
-    echo "TARGET_CPU not set! Candidates: arm, arm64, x86 and x64."
-    exit 1
-fi
-
 python3 build/chip/java/tests/generate_jars_for_test.py
 python3 third_party/android_deps/set_up_android_deps.py
 
