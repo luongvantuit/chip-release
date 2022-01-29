@@ -1,6 +1,8 @@
+#!/usr/bin/env bash
+
 set -e
 
-CHIP_ROOT="$(dirname "$0")"
+CHIP_ROOT=`pwd`
 
 git -C "$CHIP_ROOT" submodule update --init
 
@@ -32,7 +34,7 @@ gn_build "arm"
 gn_build "x64"
 gn_build "x86"
 
-cd out 
+cd $CHIP_ROOT/out 
 
 ninja_build() {
     ninja -C android_$1
@@ -43,3 +45,32 @@ ninja_build "arm"
 ninja_build "x64"
 ninja_build "x86"
 
+if [ ! -d $CHIP_ROOT/"release" ] 
+then
+    mkdir $CHIP_ROOT/"release"
+fi
+
+if [ ! -d $CHIP_ROOT/"release"/jni ] 
+then
+    mkdir $CHIP_ROOT/"release"/jni
+fi
+
+render_release() {
+    if [ ! -d $CHIP_ROOT/"release"/jni/$2 ] 
+    then
+        mkdir $CHIP_ROOT/"release"/jni/$2
+    fi
+    echo "Make release cpu structure is $1"
+    cp $CHIP_ROOT/out/android_$1/lib/jni/$2/libc++_shared.so $CHIP_ROOT/"release"/jni/$2
+    cp $CHIP_ROOT/out/android_$1/lib/jni/$2/libCHIPController.so $CHIP_ROOT/"release"/jni/$2
+    cp $CHIP_ROOT/out/android_$1/lib/jni/$2/libSetupPayloadParser.so $CHIP_ROOT/"release"/jni/$2
+}
+
+render_release "arm64" "arm64-v8a"
+render_release "arm" "armeabi-v7a"
+render_release "x86" "x86"
+render_release "x64" "x86_64"
+
+cp $CHIP_ROOT/out/android_arm64/lib/src/controller/java/CHIPController.jar $CHIP_ROOT/"release"
+cp $CHIP_ROOT/out/android_arm64/lib/src/platform/android/AndroidPlatform.jar $CHIP_ROOT/"release"
+cp $CHIP_ROOT/out/android_arm64/lib/src/setup_payload/java/SetupPayloadParser.jar $CHIP_ROOT/"release"
