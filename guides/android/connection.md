@@ -72,4 +72,3 @@ Pair Device with Ip Address
 - __AndroidBleManager__
 
 [AndroidBleManager](https://github.com/project-chip/connectedhomeip/blob/master/src/platform/android/java/chip/platform/AndroidBleManager.java)
-
