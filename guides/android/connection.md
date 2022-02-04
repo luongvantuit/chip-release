@@ -37,7 +37,7 @@ public static AndroidChipPlatfrom getAndroidChipPlatform(@Nullable Context conte
     if (mAndroidChipPlatform == null && context != null) {
 
         ChipDeviceController.loadJni();
-        mAndroidChipPlatform = new AndroidChipPlatform(new AndroidBleManager(),PreferencesKeyValueStoreManager(context), PreferencesConfigurationManager(context), NsdManagerServiceResolver(context), ChipMdnsCallbackImpl());
+        mAndroidChipPlatform = new AndroidChipPlatform(new AndroidBleManager(),new PreferencesKeyValueStoreManager(context),new PreferencesConfigurationManager(context),new NsdManagerServiceResolver(context),new ChipMdnsCallbackImpl());
         
     }
     return mAndroidChipPlatform;
@@ -52,14 +52,24 @@ ChipDeviceController required execution function loadJni before new AndroidChipP
 
 - __ChipDeviceController__
 
+[ChipDeviceController](https://github.com/project-chip/connectedhomeip/blob/master/src/controller/java/src/chip/devicecontroller/ChipDeviceController.java)
+
 ```java
 pairDevice(BluetoothGatt bleServer,int connId,long deviceId,long setupPincode,@Nullable byte[] csrNonce,NetworkCredentials networkCredentials);
 ```
 
-Connect Device with BLE
+Pair Device with BLE
 
 ```java
 pairDeviceWithAddress(long deviceId,String address,int port,int discriminator,long pinCode,@Nullable byte[] csrNonce);
 ```
 
-Connect Device with Ip Address
+Pair Device with Ip Address
+
+- __AndroidChipPlatform__
+
+
+- __AndroidBleManager__
+
+[AndroidBleManager](https://github.com/project-chip/connectedhomeip/blob/master/src/platform/android/java/chip/platform/AndroidBleManager.java)
+
