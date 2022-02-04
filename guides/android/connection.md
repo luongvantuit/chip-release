@@ -25,7 +25,7 @@ public static ChipDeviceController getDeviceController(Context context) {
 
     if (mChipDeviceController == null) {
 
-      mChipDeviceController = ChipDeviceController();
+        mChipDeviceController = ChipDeviceController();
       
     }
 
@@ -45,3 +45,21 @@ public static AndroidChipPlatfrom getAndroidChipPlatform(@Nullable Context conte
 
 
 ```
+
+## __Step 2:__ Pair Device with Address or BLE Connection
+
+ChipDeviceController required execution function loadJni before new AndroidChipPlatform
+
+- __ChipDeviceController__
+
+```java
+pairDevice(BluetoothGatt bleServer,int connId,long deviceId,long setupPincode,@Nullable byte[] csrNonce,NetworkCredentials networkCredentials);
+```
+
+Connect Device with BLE
+
+```java
+pairDeviceWithAddress(long deviceId,String address,int port,int discriminator,long pinCode,@Nullable byte[] csrNonce);
+```
+
+Connect Device with Ip Address
